@@ -6,6 +6,7 @@ This is simple python script for piping data to telegram
 
 ```shell
 git clone https://github.com/glebasson/teleout.git
+pip3 install -r requirements.txt
 chmod +x teleout.py
 sudo ln -s teleout.py /usr/local/bin/teleout
 ```

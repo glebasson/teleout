@@ -12,5 +12,5 @@ sudo ln -s teleout.py /usr/local/bin/teleout
 
 Example 
 ```shell
-man cd | teleout someuser
+man ls | teleout someuser
 ```

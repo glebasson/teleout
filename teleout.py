@@ -30,7 +30,11 @@ def main():
         with open(d, 'r') as f:
             s = f.read()
             with telethon.sync.TelegramClient(telethon.sessions.StringSession(s), api_id, api_hash) as client:
-                client.send_message(sys.argv[1], data)
+                try:
+                    peer = int(sys.argv[1])
+                except:
+                    peer = sys.argv[1]
+                client.send_message(peer, data)
                 return client
 
 

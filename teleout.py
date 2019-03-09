@@ -7,8 +7,8 @@ import os
 import time
 
 
-api_id = config.api_id
-api_hash = config.api_hash
+api_id = 17349
+api_hash = "344583e45741c457fe1862106095a5eb"
 
 
 def splitData(data):

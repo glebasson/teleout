@@ -14,7 +14,7 @@ api_hash = config.api_hash
 def splitData(data):
     # split data into messages
     messages = []
-    while len(data) > 2048:
+    while len(data) > 4096:
         messages.append(data[:4096])
         data = data[4096:]
     if data:

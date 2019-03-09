@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 import config
-import re
 import telethon.sync
 import telethon.sessions
 import sys

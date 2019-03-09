@@ -36,22 +36,21 @@ def main():
                 f.write(s)
                 f.close()
 
-    else:
-        d = os.path.expanduser('~/.config/teleout.session')
-        with open(d, 'r') as f:
-            s = f.read()
-            with telethon.sync.TelegramClient(telethon.sessions.StringSession(s), api_id, api_hash) as client:
-                try:
-                    peer = int(sys.argv[1])
-                except:
-                    peer = sys.argv[1]
-                messages = splitData(data)
-                iLast = len(messages) - 1
-                for index, message in enumerate(messages):
-                    client.send_message(peer, message)
-                    if index != iLast:
-                        time.sleep(1)
-                return client
+    d = os.path.expanduser('~/.config/teleout.session')
+    with open(d, 'r') as f:
+        s = f.read()
+        with telethon.sync.TelegramClient(telethon.sessions.StringSession(s), api_id, api_hash) as client:
+            try:
+                peer = int(sys.argv[1])
+            except:
+                peer = sys.argv[1]
+            messages = splitData(data)
+            iLast = len(messages) - 1
+            for index, message in enumerate(messages):
+                client.send_message(peer, message)
+                if index != iLast:
+                    time.sleep(1)
+            return client
 
 
 if __name__=='__main__':

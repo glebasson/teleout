@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import config
+import re
 import telethon.sync
 import telethon.sessions
 import sys
@@ -9,6 +10,17 @@ import time
 
 api_id = config.api_id
 api_hash = config.api_hash
+
+
+def splitData(data):
+    # split data into messages
+    messages = []
+    while len(data) > 2048:
+        messages.append(data[:4096])
+        data = data[4096:]
+    if data:
+        messages.append(data)
+    return messages
 
 
 def main():
@@ -35,7 +47,12 @@ def main():
                     peer = int(sys.argv[1])
                 except:
                     peer = sys.argv[1]
-                client.send_message(peer, data)
+                messages = splitData(data)
+                iLast = len(messages) - 1
+                for index, message in enumerate(messages):
+                    client.send_message(peer, message)
+                    if index != iLast:
+                        time.sleep(1)
                 return client
 
 

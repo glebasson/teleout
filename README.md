@@ -34,5 +34,5 @@ api_hash = *your api_hash*
 
 ### Example 
 ```shell
-man ls | teleout someuser
+ls | teleout someuser
 ```

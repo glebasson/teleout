@@ -10,17 +10,6 @@ api_id = 17349
 api_hash = "344583e45741c457fe1862106095a5eb"
 
 
-def splitData(data):
-    # split data into messages
-    messages = []
-    while len(data) > 4096:
-        messages.append(data[:4096])
-        data = data[4096:]
-    if data:
-        messages.append(data)
-    return messages
-
-
 def main():
     # storage data from pipe
     data = sys.stdin.read()
@@ -44,7 +33,8 @@ def main():
                 peer = int(sys.argv[1])
             except:
                 peer = sys.argv[1]
-            messages = splitData(data)
+            # split data into messages
+            messages = [data[4096*i:4096*(i+1)] for i in range(len(data)//4096+1) if data[4096*i:4096*(i+1)]]
             iLast = len(messages) - 1
             for index, message in enumerate(messages):
                 client.send_message(peer, message)

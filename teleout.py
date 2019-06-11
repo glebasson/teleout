@@ -4,11 +4,14 @@ import telethon.sessions
 import sys
 import os
 import time
+import socks
 
 
 api_id = 17349
 api_hash = "344583e45741c457fe1862106095a5eb"
-
+host = "64.90.51.110"  # a valid host
+port = 8025  # a valid port
+proxy_real = (socks.SOCKS5, host, port)
 
 def main():
     # storage data from pipe
@@ -19,7 +22,8 @@ def main():
         # reboot interactive session for terminal
         sys.stdin = open(os.ttyname(1), 'r')
         # Get client and save string for future connections
-        with telethon.sync.TelegramClient(telethon.sessions.StringSession(), api_id, api_hash) as client:
+        with telethon.sync.TelegramClient(telethon.sessions.StringSession(),
+                api_id, api_hash, proxy=proxy_real) as client:
             s = client.session.save()
             with open(filepath, 'w+') as f:
                 f.write(s)
@@ -28,7 +32,8 @@ def main():
     d = os.path.expanduser('~/.config/teleout.session')
     with open(d, 'r') as f:
         s = f.read()
-        with telethon.sync.TelegramClient(telethon.sessions.StringSession(s), api_id, api_hash) as client:
+        with telethon.sync.TelegramClient(telethon.sessions.StringSession(s),
+                api_id, api_hash, proxy=proxy_real) as client:
             try:
                 peer = int(sys.argv[1])
             except:
